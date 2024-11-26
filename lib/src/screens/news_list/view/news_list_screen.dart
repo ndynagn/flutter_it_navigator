@@ -10,6 +10,12 @@ class NewsListScreen extends StatefulWidget {
 class _NewsListScreenState extends State<NewsListScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return const Scaffold(
+      body: SafeArea(
+        child: Column(
+          children: [Placeholder()],
+        ),
+      ),
+    );
   }
 }
