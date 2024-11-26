@@ -105,5 +105,13 @@ abstract class AppThemes {
           ),
           type: BottomNavigationBarType.fixed,
         ),
+        cardTheme: CardTheme(
+          color: const Color(0xFFF8F8F8),
+          elevation: 0,
+          margin: EdgeInsets.zero,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+        ),
       );
 }

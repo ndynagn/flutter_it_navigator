@@ -12,7 +12,7 @@ class _CompaniesListScreenState extends State<CompaniesListScreen> {
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: [
-        SliverAppBar(
+        const SliverAppBar(
           title: Text('Компании'),
         ),
         SliverList.builder(
