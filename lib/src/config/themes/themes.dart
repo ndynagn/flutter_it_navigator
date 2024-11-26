@@ -53,6 +53,9 @@ abstract class AppThemes {
                 borderRadius: BorderRadius.circular(12),
               ),
             ),
+            minimumSize: const WidgetStatePropertyAll(
+              Size.fromHeight(0),
+            ),
           ),
         ),
         checkboxTheme: CheckboxThemeData(
@@ -70,6 +73,18 @@ abstract class AppThemes {
             color: Colors.black,
             width: 1.5,
           ),
+        ),
+        appBarTheme: const AppBarTheme(
+          titleTextStyle: TextStyle(
+            fontWeight: FontWeight.w700,
+            fontSize: 18,
+          ),
+          scrolledUnderElevation: 0,
+          elevation: 0,
+          backgroundColor: Colors.white,
+        ),
+        progressIndicatorTheme: const ProgressIndicatorThemeData(
+          color: Colors.white,
         ),
       );
 }

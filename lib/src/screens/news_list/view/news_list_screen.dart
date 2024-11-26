@@ -13,7 +13,9 @@ class _NewsListScreenState extends State<NewsListScreen> {
     return const Scaffold(
       body: SafeArea(
         child: Column(
-          children: [Placeholder()],
+          children: [
+            Placeholder(),
+          ],
         ),
       ),
     );
