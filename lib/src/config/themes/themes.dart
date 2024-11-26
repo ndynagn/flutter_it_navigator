@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 abstract class AppThemes {
+  const AppThemes._();
+
   static ThemeData get light => ThemeData(
         scaffoldBackgroundColor: Colors.white,
         inputDecorationTheme: InputDecorationTheme(
@@ -85,6 +87,21 @@ abstract class AppThemes {
         ),
         progressIndicatorTheme: const ProgressIndicatorThemeData(
           color: Colors.white,
+        ),
+        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          backgroundColor: Colors.white,
+          elevation: 0,
+          selectedItemColor: Colors.black,
+          unselectedItemColor: Colors.black.withOpacity(.4),
+          selectedLabelStyle: const TextStyle(
+            fontWeight: FontWeight.w700,
+            fontSize: 12,
+          ),
+          unselectedLabelStyle: const TextStyle(
+            fontWeight: FontWeight.w700,
+            fontSize: 12,
+          ),
+          type: BottomNavigationBarType.fixed,
         ),
       );
 }
