@@ -24,7 +24,11 @@ class _NewsListScreenState extends State<NewsListScreen> {
               padding: EdgeInsets.symmetric(
                 horizontal: 12,
               ),
-              child: PrimaryCard(),
+              child: PrimaryCard(
+                title: 'Новость',
+                subtitle: 'Интересная',
+                image: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.tiktok.com%2Fdiscover%2F%25D1%2582%25D0%25BE%25D0%25BC%25D0%25B0%25D1%2581-%25D1%2588%25D0%25B5%25D0%25BB%25D0%25B1%25D0%25B8-%25D0%25BC%25D0%25B5%25D0%25BC&psig=AOvVaw0OshgM3v5yfqOhUtMggVL2&ust=1732694438376000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCICqtvbD-YkDFQAAAAAdAAAAABAJ',
+              ),
             );
           },
           separatorBuilder: (context, index) {

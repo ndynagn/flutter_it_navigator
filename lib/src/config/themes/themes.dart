@@ -113,5 +113,15 @@ abstract class AppThemes {
             borderRadius: BorderRadius.circular(12),
           ),
         ),
+    chipTheme: ChipThemeData(
+      backgroundColor: Colors.grey.shade200,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(100),
+      ),
+      side: BorderSide(
+        color: Colors.lightGreen.shade400,
+        width: 2
+      )
+    )
       );
 }
