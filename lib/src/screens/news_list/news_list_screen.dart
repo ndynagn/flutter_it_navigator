@@ -10,12 +10,13 @@ class NewsListScreen extends StatefulWidget {
 class _NewsListScreenState extends State<NewsListScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [],
+    return CustomScrollView(
+      slivers: [
+        const SliverAppBar(
+          pinned: true,
+          title: Text('Новости'),
         ),
-      ),
+      ],
     );
   }
 }

@@ -80,10 +80,12 @@ abstract class AppThemes {
           titleTextStyle: TextStyle(
             fontWeight: FontWeight.w700,
             fontSize: 18,
+            color: Colors.black,
           ),
           scrolledUnderElevation: 0,
           elevation: 0,
           backgroundColor: Colors.white,
+          centerTitle: true,
         ),
         progressIndicatorTheme: const ProgressIndicatorThemeData(
           color: Colors.white,

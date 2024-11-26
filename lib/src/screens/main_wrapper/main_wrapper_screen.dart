@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_it_navigator/src/screens/educations_list/educations_list_screen.dart';
+import 'package:flutter_it_navigator/src/screens/companies_list/companies_list_screen.dart';
 import 'package:flutter_it_navigator/src/screens/events_list/events_list_screen.dart';
 import 'package:flutter_it_navigator/src/screens/news_list/news_list_screen.dart';
 import 'package:flutter_it_navigator/src/screens/organizations_list/organizations_list_screen.dart';
@@ -18,7 +18,7 @@ class _MainWrapperScreenState extends State<MainWrapperScreen> {
   Widget build(BuildContext context) {
     const screens = [
       NewsListScreen(),
-      EducationsListScreen(),
+      CompaniesListScreen(),
       OrganizationsListScreen(),
       EventsListScreen(),
     ];

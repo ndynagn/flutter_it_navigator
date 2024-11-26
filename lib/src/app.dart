@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_it_navigator/src/config/router/router.dart';
 import 'package:flutter_it_navigator/src/config/themes/themes.dart';
 import 'package:flutter_it_navigator/src/screens/main_wrapper/main_wrapper_screen.dart';
@@ -8,6 +9,15 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        systemNavigationBarColor: Colors.transparent,
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.light,
+      ),
+    );
+
     return MaterialApp(
       theme: AppThemes.light,
       debugShowCheckedModeBanner: false,

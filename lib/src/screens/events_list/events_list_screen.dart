@@ -10,12 +10,10 @@ class EventsListScreen extends StatefulWidget {
 class _EventsListScreenState extends State<EventsListScreen> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: const Column(
-        children: [
-          Text('Events'),
-        ],
-      ),
+    return const Column(
+      children: [
+        Text('Events'),
+      ],
     );
   }
 }
