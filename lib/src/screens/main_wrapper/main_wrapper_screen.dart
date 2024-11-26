@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_it_navigator/src/screens/companies_list/companies_list_screen.dart';
+import 'package:flutter_it_navigator/src/screens/education_list/education_list_screen.dart';
 import 'package:flutter_it_navigator/src/screens/events_list/events_list_screen.dart';
 import 'package:flutter_it_navigator/src/screens/news_list/news_list_screen.dart';
-import 'package:flutter_it_navigator/src/screens/organizations_list/organizations_list_screen.dart';
 
 class MainWrapperScreen extends StatefulWidget {
   const MainWrapperScreen({super.key});
@@ -19,7 +19,7 @@ class _MainWrapperScreenState extends State<MainWrapperScreen> {
     const screens = [
       NewsListScreen(),
       CompaniesListScreen(),
-      OrganizationsListScreen(),
+      EducationListScreen(),
       EventsListScreen(),
     ];
 

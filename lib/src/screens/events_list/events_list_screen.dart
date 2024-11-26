@@ -10,9 +10,12 @@ class EventsListScreen extends StatefulWidget {
 class _EventsListScreenState extends State<EventsListScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Column(
-      children: [
-        Text('Events'),
+    return const CustomScrollView(
+      slivers: [
+        SliverAppBar(
+          pinned: true,
+          title: Text('IT-Мероприятия'),
+        ),
       ],
     );
   }

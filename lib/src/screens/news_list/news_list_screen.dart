@@ -10,9 +10,9 @@ class NewsListScreen extends StatefulWidget {
 class _NewsListScreenState extends State<NewsListScreen> {
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
+    return const CustomScrollView(
       slivers: [
-        const SliverAppBar(
+        SliverAppBar(
           pinned: true,
           title: Text('Новости'),
         ),

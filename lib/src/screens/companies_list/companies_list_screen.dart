@@ -13,7 +13,7 @@ class _CompaniesListScreenState extends State<CompaniesListScreen> {
     return CustomScrollView(
       slivers: [
         SliverAppBar(
-          title: Text('Gay'),
+          title: Text('Компании'),
         ),
         SliverList.builder(
           itemBuilder: (context, index) {
