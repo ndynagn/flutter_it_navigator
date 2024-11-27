@@ -113,11 +113,17 @@ abstract class AppThemes {
             borderRadius: BorderRadius.circular(12),
           ),
         ),
-    listTileTheme: ListTileThemeData(
-      titleTextStyle: TextStyle(
-        fontWeight: FontWeight.w500,
-        fontSize: 15,
-      ),
-    ),
+        chipTheme: ChipThemeData(
+            backgroundColor: Colors.grey.shade200,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(100),
+            ),
+            side: BorderSide(color: Colors.lightGreen.shade400, width: 2)),
+        listTileTheme: const ListTileThemeData(
+          titleTextStyle: TextStyle(
+            fontWeight: FontWeight.w500,
+            fontSize: 15,
+          ),
+        ),
       );
 }

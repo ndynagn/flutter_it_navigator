@@ -2,7 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 class PrimaryCard extends StatelessWidget {
-  const PrimaryCard({super.key});
+  const PrimaryCard({
+    super.key,
+    required this.title,
+    required this.subtitle,
+    required this.image,
+  });
+
+  final String title;
+  final String subtitle;
+  final String image;
 
   @override
   Widget build(BuildContext context) {
@@ -36,8 +45,8 @@ class PrimaryCard extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'data',
+                  Text(
+                    title,
                     style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 16,
@@ -47,7 +56,7 @@ class PrimaryCard extends StatelessWidget {
                   ),
                   const Gap(12),
                   Text(
-                    'data',
+                    subtitle,
                     style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 10,
