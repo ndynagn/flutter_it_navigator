@@ -127,6 +127,7 @@ class _EducationListScreenState extends State<EducationListScreen> {
                   title: _companies[index].name,
                   subtitle: _companies[index].description,
                   image: _companies[index].image,
+                  onTap: () {},
                 ),
               );
             },

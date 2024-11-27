@@ -9,6 +9,7 @@ class VacancyResponse {
     required this.name,
     required this.experience,
     required this.idCompany,
+    required this.image,
   });
 
   factory VacancyResponse.fromJson(Map<String, dynamic> json) =>
@@ -16,8 +17,18 @@ class VacancyResponse {
 
   Map<String, dynamic> toJson() => _$VacancyResponseToJson(this);
 
+  @JsonKey(name: 'id')
   final int id;
+
+  @JsonKey(name: 'name')
   final String name;
+
+  @JsonKey(name: 'experience')
   final String experience;
+
+  @JsonKey(name: 'id_company')
   final int idCompany;
+
+  @JsonKey(name: 'image')
+  final String image;
 }
