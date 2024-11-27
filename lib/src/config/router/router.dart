@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_it_navigator/src/screens/auth/authorization_screen.dart';
+import 'package:flutter_it_navigator/src/screens/auth/registration_screen.dart';
 import 'package:flutter_it_navigator/src/screens/filters/filters_screen.dart';
 import 'package:flutter_it_navigator/src/screens/main_wrapper/main_wrapper_screen.dart';
 import 'package:flutter_it_navigator/src/screens/profile/profile_screen.dart';
-import 'package:flutter_it_navigator/src/screens/news_list/details/article_details_screen.dart';
 
 abstract class AppRouter {
   const AppRouter();
 
   static Map<String, Widget Function(BuildContext)> get routes => {
+    '': (context) => AuthorizationScreen(),
     '/': (context) => MainWrapperScreen(),
+    '/registration': (context) => RegistrationScreen(),
     '/filters': (context) => FiltersScreen(),
     '/profile': (context) => ProfileScreen(),
   };

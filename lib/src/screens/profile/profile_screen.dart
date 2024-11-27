@@ -55,26 +55,23 @@ class ProfileScreen extends StatelessWidget {
             ),
           ),
           const Gap(12),
-          const ListTile(
-            leading: CircleAvatar(
-              radius: 6,
-              backgroundColor: Colors.black,
-            ),
-            title: Text(
-              'ОАЭ/Дубай',
-              style: TextStyle(color: Colors.black),
-            ),
+          const Row(
+            children: [
+              Icon(
+                Icons.location_on,
+              ),
+              Text(
+                'Россия/Омск',
+                style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
+              ),
+              Spacer(),
+              Text(
+                '19 лет',
+                style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
+              ),
+            ],
           ),
-          const ListTile(
-            leading: CircleAvatar(
-              radius: 6,
-              backgroundColor: Colors.black,
-            ),
-            title: Text(
-              '19 лет',
-              style: TextStyle(color: Colors.black),
-            ),
-          ),
+          const Gap(12),
           const Divider(
             color: Colors.black,
           ),
@@ -83,9 +80,10 @@ class ProfileScreen extends StatelessWidget {
             child: Text(
               'Новости пользователя',
               style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 18,),
+                color: Colors.black,
+                fontWeight: FontWeight.w600,
+                fontSize: 18,
+              ),
             ),
           ),
           ListView.separated(
@@ -97,7 +95,8 @@ class ProfileScreen extends StatelessWidget {
                 child: PrimaryCard(
                   title: 'Новость ${index + 1}',
                   subtitle: 'Интересная новость',
-                  image: 'https://via.placeholder.com/150', // Замените на действительный URL изображения
+                  image: 'https://via.placeholder.com/150',
+                  onTap: () {},
                 ),
               );
             },

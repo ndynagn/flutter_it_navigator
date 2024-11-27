@@ -21,6 +21,7 @@ class App extends StatelessWidget {
       theme: AppThemes.light,
       debugShowCheckedModeBanner: false,
       routes: AppRouter.routes,
+      initialRoute: '',
     );
   }
 }

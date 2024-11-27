@@ -1,8 +1,12 @@
+import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_it_navigator/src/screens/events_list/widgets/event_widget.dart';
+import 'package:flutter_it_navigator/src/common/models/event_response.dart';
 import 'package:flutter_it_navigator/src/screens/filters/filters_screen.dart';
 import 'package:flutter_it_navigator/src/screens/profile/profile_screen.dart';
+import 'package:flutter_it_navigator/src/screens/events_list/widgets/event_widget.dart';
 import 'package:gap/gap.dart';
+import 'package:get_it/get_it.dart';
 
 class EventsListScreen extends StatefulWidget {
   const EventsListScreen({super.key});
@@ -12,6 +16,43 @@ class EventsListScreen extends StatefulWidget {
 }
 
 class _EventsListScreenState extends State<EventsListScreen> {
+  late final Dio _dio;
+  bool _isLoading = true;
+  DioException? _error;
+  List<EventResponse> _events = [];
+
+  @override
+  void initState() {
+    _dio = GetIt.I.get<Dio>();
+    super.initState();
+    _fetchEvents();
+  }
+
+  Future<void> _fetchEvents() async {
+    try {
+      _isLoading = true;
+
+      final response = await _dio.get<List<dynamic>>('/events/');
+
+      setState(() {
+        _events = List.generate(
+          response.data!.length,
+              (index) => EventResponse.fromJson(
+            response.data![index],
+          ),
+        );
+      });
+    } on DioException catch (e) {
+      setState(() {
+        _error = e;
+      });
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
@@ -47,23 +88,52 @@ class _EventsListScreenState extends State<EventsListScreen> {
             const SizedBox(width: 16),
           ],
         ),
-        SliverList.separated(
-          itemBuilder: (context, index) {
-            return const Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 12,
-                ),
+        if (_isLoading)
+          const SliverFillRemaining(
+            hasScrollBody: false,
+            child: SafeArea(
+              top: false,
+              child: Center(
+                child: CupertinoActivityIndicator(),
+              ),
+            ),
+          )
+        else if (_error != null)
+          SliverFillRemaining(
+            hasScrollBody: false,
+            child: SafeArea(
+              top: false,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    '${_error!.response!.statusCode} '
+                        '${_error!.response!.statusMessage!}',
+                  ),
+                ],
+              ),
+            ),
+          )
+        else
+          SliverList.separated(
+            itemCount: _events.length,
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
                 child: EventWidget(
-                  date: '13 April 2025',
-                  members: 52,
-                  place: 'Omsk',
-                  title: 'IT - Субботник',
-                ));
-          },
-          separatorBuilder: (context, index) {
-            return const Gap(12);
-          },
-        ),
+                  image: _events[index].image,
+                  date: _events[index].date.toLocal().toString().split(' ')[0],
+                  members: _events[index].countPeople,
+                  place: _events[index].city,
+                  title: _events[index].title,
+                ),
+              );
+            },
+            separatorBuilder: (context, index) {
+              return const Gap(12);
+            },
+          ),
+        const SliverGap(12),
       ],
     );
   }

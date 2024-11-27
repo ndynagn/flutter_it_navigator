@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_it_navigator/src/common/models/article_response.dart';
 import 'package:flutter_it_navigator/src/common/primary_card.dart';
 import 'package:flutter_it_navigator/src/screens/filters/filters_screen.dart';
-import 'package:flutter_it_navigator/src/screens/news_list/details/article_details_screen.dart';
+import 'package:flutter_it_navigator/src/screens/news_list/widgets/create_news_sheet.dart';
 import 'package:flutter_it_navigator/src/screens/profile/profile_screen.dart';
 import 'package:gap/gap.dart';
 import 'package:get_it/get_it.dart';
@@ -56,96 +56,96 @@ class _NewsListScreenState extends State<NewsListScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: [
-        SliverAppBar(
-          pinned: true,
-          title: const Text('Новости'),
-          actions: [
-            IconButton(
-              onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const FiltersScreen(),
-                  fullscreenDialog: true,
-                ),
-              ),
-              icon: const Icon(
-                Icons.sort_outlined,
-              ),
-            ),
-            IconButton(
-              onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const ProfileScreen(),
-                  fullscreenDialog: true,
-                ),
-              ),
-              icon: const Icon(
-                Icons.person_outlined,
-              ),
-            ),
-            const SizedBox(width: 16),
-          ],
-        ),
-        if (_isLoading)
-          const SliverFillRemaining(
-            hasScrollBody: false,
-            child: SafeArea(
-              top: false,
-              child: Center(
-                child: CupertinoActivityIndicator(),
-              ),
-            ),
-          )
-        else if (_error != null)
-          SliverFillRemaining(
-            hasScrollBody: false,
-            child: SafeArea(
-              top: false,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    '${_error!.response!.statusCode} '
-                    '${_error!.response!.statusMessage!}',
-                  ),
-                ],
-              ),
-            ),
-          )
-        else
-          SliverList.separated(
-            itemCount: _news.length,
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 12,
-                ),
-                child: PrimaryCard(
-                  title: _news[index].title,
-                  subtitle: _news[index].description,
-                  image: _news[index].image,
-                  onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return ArticleDetailsScreen(
-                          id: _news[index].id,
-                        );
-                      },
-                    ),
+    return Scaffold(
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            pinned: true,
+            title: const Text('Новости'),
+            actions: [
+              IconButton(
+                onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const FiltersScreen(),
+                    fullscreenDialog: true,
                   ),
                 ),
-              );
-            },
-            separatorBuilder: (context, index) {
-              return const Gap(12);
-            },
+                icon: const Icon(
+                  Icons.sort_outlined,
+                ),
+              ),
+              IconButton(
+                onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ProfileScreen(),
+                    fullscreenDialog: true,
+                  ),
+                ),
+                icon: const Icon(
+                  Icons.person_outlined,
+                ),
+              ),
+              const SizedBox(width: 16),
+            ],
           ),
-        const SliverGap(12),
-      ],
+          if (_isLoading)
+            const SliverFillRemaining(
+              hasScrollBody: false,
+              child: SafeArea(
+                top: false,
+                child: Center(
+                  child: CupertinoActivityIndicator(),
+                ),
+              ),
+            )
+          else if (_error != null)
+            SliverFillRemaining(
+              hasScrollBody: false,
+              child: SafeArea(
+                top: false,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      '${_error!.response!.statusCode} '
+                      '${_error!.response!.statusMessage!}',
+                    ),
+                  ],
+                ),
+              ),
+            )
+          else
+            SliverList.separated(
+              itemCount: _news.length,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                  ),
+                  child: PrimaryCard(
+                    title: _news[index].title,
+                    subtitle: _news[index].description,
+                    image: _news[index].image,
+                    onTap: () {},
+                  ),
+                );
+              },
+              separatorBuilder: (context, index) {
+                return const Gap(12);
+              },
+            ),
+          const SliverGap(12),
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
+        onPressed: () => showCreateNews(context),
+      ),
     );
   }
 }

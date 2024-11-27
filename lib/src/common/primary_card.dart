@@ -61,7 +61,7 @@ class PrimaryCard extends StatelessWidget {
                       subtitle,
                       style: TextStyle(
                         fontWeight: FontWeight.w700,
-                        fontSize: 10,
+                        fontSize: 12,
                         color: Colors.black.withOpacity(.4),
                       ),
                       maxLines: 4,

@@ -41,7 +41,7 @@ void showCreateNews(BuildContext context) {
                         Text(
                           'Добавление',
                           style: TextStyle(
-                              fontWeight: FontWeight.w500, fontSize: 16),
+                              fontWeight: FontWeight.w700, fontSize: 24),
                         ),
                         IconButton(
                           onPressed: () => Navigator.pop(context),
