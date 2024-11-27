@@ -6,7 +6,7 @@ part 'article_response.g.dart';
 class ArticleResponse {
   const ArticleResponse({
     required this.id,
-    // required this.image,
+    required this.image,
     required this.title,
     required this.description,
     required this.datePost,
@@ -20,7 +20,9 @@ class ArticleResponse {
 
   @JsonKey(name: 'id')
   final int id;
-  // final String image;
+
+  @JsonKey(name: 'image')
+  final String image;
 
   @JsonKey(name: 'title')
   final String title;
