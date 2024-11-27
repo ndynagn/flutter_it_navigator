@@ -1,8 +1,12 @@
+import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_it_navigator/src/screens/filters/filters_screen.dart';
+import 'package:flutter_it_navigator/src/common/models/education_company_response.dart';
 import 'package:flutter_it_navigator/src/common/primary_card.dart';
 import 'package:flutter_it_navigator/src/screens/profile/profile_screen.dart';
+import 'package:flutter_it_navigator/src/screens/filters/filters_screen.dart';
 import 'package:gap/gap.dart';
+import 'package:get_it/get_it.dart';
 
 class EducationListScreen extends StatefulWidget {
   const EducationListScreen({super.key});
@@ -13,6 +17,43 @@ class EducationListScreen extends StatefulWidget {
 }
 
 class _EducationListScreenState extends State<EducationListScreen> {
+  late final Dio _dio;
+  bool _isLoading = true;
+  DioException? _error;
+  List<EducationCompanyResponse> _companies = [];
+
+  @override
+  void initState() {
+    _dio = GetIt.I.get<Dio>();
+    super.initState();
+    _fetchCompanies();
+  }
+
+  Future<void> _fetchCompanies() async {
+    try {
+      _isLoading = true;
+
+      final response = await _dio.get<List<dynamic>>('/education-companies/');
+
+      setState(() {
+        _companies = List.generate(
+          response.data!.length,
+          (index) => EducationCompanyResponse.fromJson(
+            response.data![index],
+          ),
+        );
+      });
+    } on DioException catch (e) {
+      setState(() {
+        _error = e;
+      });
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
@@ -48,23 +89,52 @@ class _EducationListScreenState extends State<EducationListScreen> {
             const SizedBox(width: 16),
           ],
         ),
-        SliverList.separated(
-          itemBuilder: (context, index) {
-            return const Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: 12,
+        if (_isLoading)
+          const SliverFillRemaining(
+            hasScrollBody: false,
+            child: SafeArea(
+              top: false,
+              child: Center(
+                child: CupertinoActivityIndicator(),
               ),
-              child: PrimaryCard(
-                title: 'Колледж',
-                subtitle: 'Омавиат',
-                image: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fleader-id.ru%2Fen%2Fevents%2F511644&psig=AOvVaw3BoWrJPFloGp-931PYmcHF&ust=1732694368841000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCJCMtNnD-YkDFQAAAAAdAAAAABAE',
+            ),
+          )
+        else if (_error != null)
+          SliverFillRemaining(
+            hasScrollBody: false,
+            child: SafeArea(
+              top: false,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    '${_error!.response!.statusCode} '
+                    '${_error!.response!.statusMessage!}',
+                  ),
+                ],
               ),
-            );
-          },
-          separatorBuilder: (context, index) {
-            return const Gap(12);
-          },
-        ),
+            ),
+          )
+        else
+          SliverList.separated(
+            itemCount: _companies.length,
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                ),
+                child: PrimaryCard(
+                  title: _companies[index].name,
+                  subtitle: _companies[index].description,
+                  image: _companies[index].image,
+                ),
+              );
+            },
+            separatorBuilder: (context, index) {
+              return const Gap(12);
+            },
+          ),
+        const SliverGap(12),
       ],
     );
   }

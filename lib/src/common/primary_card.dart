@@ -32,40 +32,41 @@ class PrimaryCard extends StatelessWidget {
                 width: 100,
                 height: 100,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    image: const DecorationImage(
-                      image: NetworkImage(
-                        'https://rostec.ru/upload/iblock/17d/a4934o90jxz8bdlf35l8x2pdsewvp7m0.JPG',
-                      ),
-                      fit: BoxFit.cover,
-                    ),
-                    color: Colors.white),
+                  borderRadius: BorderRadius.circular(12),
+                  image: DecorationImage(
+                    image: NetworkImage(image),
+                    fit: BoxFit.cover,
+                  ),
+                  color: Colors.white,
+                ),
               ),
               const Gap(24),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 16,
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w700,
+                        fontSize: 16,
+                      ),
+                      maxLines: 4,
+                      overflow: TextOverflow.ellipsis,
                     ),
-                    maxLines: 4,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  const Gap(12),
-                  Text(
-                    subtitle,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 10,
-                      color: Colors.black.withOpacity(.4),
+                    const Gap(12),
+                    Text(
+                      subtitle,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w700,
+                        fontSize: 10,
+                        color: Colors.black.withOpacity(.4),
+                      ),
+                      maxLines: 4,
+                      overflow: TextOverflow.ellipsis,
                     ),
-                    maxLines: 4,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ],
+                  ],
+                ),
               ),
             ],
           ),

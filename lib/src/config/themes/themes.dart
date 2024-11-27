@@ -123,6 +123,7 @@ abstract class AppThemes {
           titleTextStyle: TextStyle(
             fontWeight: FontWeight.w500,
             fontSize: 15,
+            color: Colors.black,
           ),
         ),
         floatingActionButtonTheme: FloatingActionButtonThemeData(

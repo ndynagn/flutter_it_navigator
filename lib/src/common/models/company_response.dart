@@ -6,7 +6,7 @@ part 'company_response.g.dart';
 class CompanyResponse {
   const CompanyResponse({
     required this.id,
-    // required this.image,
+    required this.image,
     required this.name,
     required this.description,
   });
@@ -17,7 +17,7 @@ class CompanyResponse {
   Map<String, dynamic> toJson() => _$CompanyResponseToJson(this);
 
   final int id;
-  // final String image;
+  final String image;
   final String name;
   final String description;
 }

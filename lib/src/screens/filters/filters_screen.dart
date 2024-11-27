@@ -9,6 +9,11 @@ class FiltersScreen extends StatefulWidget {
 }
 
 class _FiltersScreenState extends State<FiltersScreen> {
+  bool _isProducts = false;
+  bool _isItBusiness = false;
+  bool _isStartup = false;
+  bool _isMarketing = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,10 +55,32 @@ class _FiltersScreenState extends State<FiltersScreen> {
               ),
               value: true,
               onChanged: (value) {},
+              title: const Text('Продукт'),
+              value: _isProducts,
+              onChanged: (value) {
+                if (value == null) {
+                  return;
+                }
+
+                setState(() {
+                  _isProducts = value;
+                });
+              },
             ),
           ),
           SliverToBoxAdapter(
             child: CheckboxListTile(
+              title: const Text('IT Бизнес'),
+              value: _isItBusiness,
+              onChanged: (value) {
+                if (value == null) {
+                  return;
+                }
+
+                setState(() {
+                  _isItBusiness = value;
+                });
+              },
               title: const Text(
                 'IT Бизнес',
                 style: TextStyle(
@@ -68,6 +95,17 @@ class _FiltersScreenState extends State<FiltersScreen> {
           ),
           SliverToBoxAdapter(
             child: CheckboxListTile(
+              title: const Text('Стартапы'),
+              value: _isStartup,
+              onChanged: (value) {
+                if (value == null) {
+                  return;
+                }
+
+                setState(() {
+                  _isStartup = value;
+                });
+              },
               title: const Text(
                 'Стартапы',
                 style: TextStyle(
@@ -92,6 +130,17 @@ class _FiltersScreenState extends State<FiltersScreen> {
               ),
               value: true,
               onChanged: (value) {},
+              title: const Text('Маркетинг'),
+              value: _isMarketing,
+              onChanged: (value) {
+                if (value == null) {
+                  return;
+                }
+
+                setState(() {
+                  _isMarketing = value;
+                });
+              },
             ),
           ),
           const SliverToBoxAdapter(
