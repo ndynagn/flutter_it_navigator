@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_it_navigator/src/screens/filters/filters_screen.dart';
+import 'package:flutter_it_navigator/src/screens/profile/profile_screen.dart';
 
 class CompaniesListScreen extends StatefulWidget {
   const CompaniesListScreen({super.key});
@@ -26,6 +27,18 @@ class _CompaniesListScreenState extends State<CompaniesListScreen> {
               ),
               icon: const Icon(
                 Icons.sort_outlined,
+              ),
+            ),
+            IconButton(
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ProfileScreen(),
+                  fullscreenDialog: true,
+                ),
+              ),
+              icon: const Icon(
+                Icons.person_outlined,
               ),
             ),
             const SizedBox(width: 16),

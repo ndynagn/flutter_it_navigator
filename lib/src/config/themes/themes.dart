@@ -125,5 +125,9 @@ abstract class AppThemes {
             fontSize: 15,
           ),
         ),
+        floatingActionButtonTheme: FloatingActionButtonThemeData(
+          backgroundColor: Colors.black,
+          elevation: 0
+        ),
       );
 }

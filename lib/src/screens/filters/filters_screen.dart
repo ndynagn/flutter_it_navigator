@@ -40,28 +40,56 @@ class _FiltersScreenState extends State<FiltersScreen> {
           const SliverGap(12),
           SliverToBoxAdapter(
             child: CheckboxListTile(
-              title: const Text('Продукт'),
+              title: const Text(
+                'Продукт',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
               value: true,
               onChanged: (value) {},
             ),
           ),
           SliverToBoxAdapter(
             child: CheckboxListTile(
-              title: const Text('IT Бизнес'),
+              title: const Text(
+                'IT Бизнес',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
               value: true,
               onChanged: (value) {},
             ),
           ),
           SliverToBoxAdapter(
             child: CheckboxListTile(
-              title: const Text('Стартапы'),
+              title: const Text(
+                'Стартапы',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
               value: true,
               onChanged: (value) {},
             ),
           ),
           SliverToBoxAdapter(
             child: CheckboxListTile(
-              title: const Text('Маркетинг'),
+              title: const Text(
+                'Маркетинг',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
               value: true,
               onChanged: (value) {},
             ),

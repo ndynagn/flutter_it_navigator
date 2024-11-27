@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_it_navigator/src/common/primary_card.dart';
 import 'package:flutter_it_navigator/src/screens/filters/filters_screen.dart';
+import 'package:flutter_it_navigator/src/screens/profile/profile_screen.dart';
 import 'package:gap/gap.dart';
 
 class NewsListScreen extends StatefulWidget {
@@ -29,6 +30,18 @@ class _NewsListScreenState extends State<NewsListScreen> {
               ),
               icon: const Icon(
                 Icons.sort_outlined,
+              ),
+            ),
+            IconButton(
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ProfileScreen(),
+                  fullscreenDialog: true,
+                ),
+              ),
+              icon: const Icon(
+                Icons.person_outlined,
               ),
             ),
             const SizedBox(width: 16),
