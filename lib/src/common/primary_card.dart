@@ -42,30 +42,32 @@ class PrimaryCard extends StatelessWidget {
                     color: Colors.white),
               ),
               const Gap(24),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 16,
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w700,
+                        fontSize: 16,
+                      ),
+                      maxLines: 4,
+                      overflow: TextOverflow.ellipsis,
                     ),
-                    maxLines: 4,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  const Gap(12),
-                  Text(
-                    subtitle,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 10,
-                      color: Colors.black.withOpacity(.4),
+                    const Gap(12),
+                    Text(
+                      subtitle,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w700,
+                        fontSize: 10,
+                        color: Colors.black.withOpacity(.4),
+                      ),
+                      maxLines: 4,
+                      overflow: TextOverflow.ellipsis,
                     ),
-                    maxLines: 4,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ],
+                  ],
+                ),
               ),
             ],
           ),
