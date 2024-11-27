@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_it_navigator/src/common/models/company_response.dart';
 import 'package:flutter_it_navigator/src/common/primary_card.dart';
+import 'package:flutter_it_navigator/src/screens/companies_list/details/company_details.dart';
 import 'package:flutter_it_navigator/src/screens/filters/filters_screen.dart';
 import 'package:gap/gap.dart';
 import 'package:get_it/get_it.dart';
@@ -57,6 +58,7 @@ class _CompaniesListScreenState extends State<CompaniesListScreen> {
     return CustomScrollView(
       slivers: [
         SliverAppBar(
+          pinned: true,
           title: const Text('Компании'),
           actions: [
             IconButton(
@@ -112,6 +114,16 @@ class _CompaniesListScreenState extends State<CompaniesListScreen> {
                   title: _companies[index].name,
                   subtitle: _companies[index].description,
                   image: _companies[index].image,
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return CompanyDetails(
+                          id: _companies[index].id,
+                        );
+                      },
+                    ),
+                  ),
                 ),
               );
             },

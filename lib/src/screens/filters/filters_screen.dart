@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_it_navigator/src/common/primary_elevated_button.dart';
+import 'package:flutter_it_navigator/src/screens/filters/models/filter_model.dart';
 import 'package:gap/gap.dart';
 
 class FiltersScreen extends StatefulWidget {
@@ -9,19 +11,48 @@ class FiltersScreen extends StatefulWidget {
 }
 
 class _FiltersScreenState extends State<FiltersScreen> {
-  bool _isProducts = false;
-  bool _isItBusiness = false;
-  bool _isStartup = false;
-  bool _isMarketing = false;
+  final _selectedFilters = <String>{};
+  final _filters = const [
+    FilterModel(
+      id: 1,
+      title: 'Продукт',
+      value: 'product',
+    ),
+    FilterModel(
+      id: 1,
+      title: 'IT Бизнес',
+      value: 'it_business',
+    ),
+    FilterModel(
+      id: 1,
+      title: 'Стартапы',
+      value: 'startup',
+    ),
+    FilterModel(
+      id: 1,
+      title: 'Маркетинг',
+      value: 'marketing',
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          const SliverAppBar(
+          SliverAppBar(
             pinned: true,
-            title: Text('Фильтры'),
+            title: const Text('Фильтры'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  setState(
+                    _selectedFilters.clear,
+                  );
+                },
+                child: const Text('Сбросить'),
+              ),
+            ],
           ),
           const SliverGap(24),
           const SliverPadding(
@@ -43,70 +74,57 @@ class _FiltersScreenState extends State<FiltersScreen> {
             ),
           ),
           const SliverGap(12),
-          SliverToBoxAdapter(
-            child: CheckboxListTile(
-              title: const Text('Продукт'),
-              value: _isProducts,
-              onChanged: (value) {
-                if (value == null) {
-                  return;
-                }
-
-                setState(() {
-                  _isProducts = value;
-                });
-              },
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: CheckboxListTile(
-              title: const Text('IT Бизнес'),
-              value: _isItBusiness,
-              onChanged: (value) {
-                if (value == null) {
-                  return;
-                }
-
-                setState(() {
-                  _isItBusiness = value;
-                });
-              },
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: CheckboxListTile(
-              title: const Text('Стартапы'),
-              value: _isStartup,
-              onChanged: (value) {
-                if (value == null) {
-                  return;
-                }
-
-                setState(() {
-                  _isStartup = value;
-                });
-              },
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: CheckboxListTile(
-              title: const Text('Маркетинг'),
-              value: _isMarketing,
-              onChanged: (value) {
-                if (value == null) {
-                  return;
-                }
-
-                setState(() {
-                  _isMarketing = value;
-                });
-              },
-            ),
+          SliverList.builder(
+            itemCount: _filters.length,
+            itemBuilder: (context, index) {
+              return CheckboxListTile(
+                title: Text(_filters[index].title),
+                value: _selectedFilters.contains(
+                  _filters[index].value,
+                ),
+                onChanged: (value) {
+                  if (_selectedFilters.contains(
+                    _filters[index].value,
+                  )) {
+                    setState(() {
+                      _selectedFilters.remove(
+                        _filters[index].value,
+                      );
+                    });
+                  } else {
+                    setState(() {
+                      _selectedFilters.add(
+                        _filters[index].value,
+                      );
+                    });
+                  }
+                },
+              );
+            },
           ),
           const SliverToBoxAdapter(
             child: Divider(),
           ),
-          const SliverGap(12),
+          SliverFillRemaining(
+            hasScrollBody: false,
+            child: SafeArea(
+              top: false,
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                    left: 24,
+                    right: 24,
+                    bottom: 12,
+                  ),
+                  child: PrimaryElevatedButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: const Text('Закрыть'),
+                  ),
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );

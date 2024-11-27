@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_it_navigator/src/common/models/article_response.dart';
 import 'package:flutter_it_navigator/src/common/primary_card.dart';
 import 'package:flutter_it_navigator/src/screens/filters/filters_screen.dart';
+import 'package:flutter_it_navigator/src/screens/news_list/details/article_details_screen.dart';
 import 'package:gap/gap.dart';
 import 'package:get_it/get_it.dart';
 
@@ -113,6 +114,16 @@ class _NewsListScreenState extends State<NewsListScreen> {
                   title: _news[index].title,
                   subtitle: _news[index].description,
                   image: _news[index].image,
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return ArticleDetailsScreen(
+                          id: _news[index].id,
+                        );
+                      },
+                    ),
+                  ),
                 ),
               );
             },

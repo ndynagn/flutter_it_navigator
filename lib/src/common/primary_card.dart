@@ -7,11 +7,13 @@ class PrimaryCard extends StatelessWidget {
     required this.title,
     required this.subtitle,
     required this.image,
+    required this.onTap,
   });
 
   final String title;
   final String subtitle;
   final String image;
+  final GestureTapCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,7 @@ class PrimaryCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
       ),
       child: InkWell(
-        onTap: () {},
+        onTap: onTap,
         borderRadius: BorderRadius.circular(12),
         child: Padding(
           padding: const EdgeInsets.all(10),
