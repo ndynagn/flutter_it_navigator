@@ -113,5 +113,11 @@ abstract class AppThemes {
             borderRadius: BorderRadius.circular(12),
           ),
         ),
+    listTileTheme: ListTileThemeData(
+      titleTextStyle: TextStyle(
+        fontWeight: FontWeight.w500,
+        fontSize: 15,
+      ),
+    ),
       );
 }

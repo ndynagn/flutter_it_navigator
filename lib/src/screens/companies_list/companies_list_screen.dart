@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_it_navigator/src/screens/filters/filters_screen.dart';
 
 class CompaniesListScreen extends StatefulWidget {
   const CompaniesListScreen({super.key});
@@ -12,12 +13,27 @@ class _CompaniesListScreenState extends State<CompaniesListScreen> {
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: [
-        const SliverAppBar(
-          title: Text('Компании'),
+        SliverAppBar(
+          title: const Text('Компании'),
+          actions: [
+            IconButton(
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const FiltersScreen(),
+                  fullscreenDialog: true,
+                ),
+              ),
+              icon: const Icon(
+                Icons.sort_outlined,
+              ),
+            ),
+            const SizedBox(width: 16),
+          ],
         ),
         SliverList.builder(
           itemBuilder: (context, index) {
-            return Text('data');
+            return const Text('data');
           },
         ),
       ],
