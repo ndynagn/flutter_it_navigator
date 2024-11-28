@@ -50,6 +50,7 @@ abstract class AppThemes {
 
               return Colors.black;
             }),
+            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
             shape: WidgetStatePropertyAll(
               RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),

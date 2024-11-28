@@ -7,18 +7,24 @@ class PrimaryCard extends StatelessWidget {
     required this.title,
     required this.subtitle,
     required this.image,
+    this.isVacancy = false,
     required this.onTap,
+    this.onAddTap,
+    this.isAdded = false,
   });
 
   final String title;
   final String subtitle;
   final String image;
+  final bool isVacancy;
   final GestureTapCallback? onTap;
+  final VoidCallback? onAddTap;
+  final bool isAdded;
 
   @override
   Widget build(BuildContext context) {
     return Ink(
-      height: 120,
+      height: isVacancy ? 170 : 120,
       decoration: BoxDecoration(
         color: const Color(0xFFF8F8F8),
         borderRadius: BorderRadius.circular(12),
@@ -47,14 +53,31 @@ class PrimaryCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      title,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w700,
-                        fontSize: 16,
-                      ),
-                      maxLines: 4,
-                      overflow: TextOverflow.ellipsis,
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            title,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.w700,
+                              fontSize: 16,
+                            ),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        if (isVacancy) ...[
+                          IconButton(
+                            onPressed: onAddTap,
+                            icon: Icon(
+                              isAdded
+                                  ? Icons.favorite_rounded
+                                  : Icons.favorite_border_outlined,
+                              color: isAdded ? Colors.red : null,
+                            ),
+                          ),
+                        ],
+                      ],
                     ),
                     const Gap(12),
                     Text(
@@ -64,9 +87,31 @@ class PrimaryCard extends StatelessWidget {
                         fontSize: 12,
                         color: Colors.black.withOpacity(.4),
                       ),
-                      maxLines: 4,
+                      maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
+                    if (isVacancy) ...[
+                      const Gap(12),
+                      ElevatedButton(
+                        onPressed: () {},
+                        style: ButtonStyle(
+                          shape: WidgetStatePropertyAll(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                          ),
+                          backgroundColor: const WidgetStatePropertyAll(
+                            Color(0xFF8C8C8C),
+                          ),
+                        ),
+                        child: const Padding(
+                          padding: EdgeInsets.symmetric(
+                            vertical: 4,
+                          ),
+                          child: Text('Сотрудничество'),
+                        ),
+                      ),
+                    ],
                   ],
                 ),
               ),

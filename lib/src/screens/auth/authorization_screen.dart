@@ -15,11 +15,11 @@ class _AuthorizationScreenState extends State<AuthorizationScreen> {
   final TextEditingController _passwordController = TextEditingController();
   bool _isChecked = false;
 
-  bool get _isButtonEnabled {
-    return _emailController.text.isNotEmpty &&
-        _passwordController.text.isNotEmpty &&
-        _isChecked;
-  }
+  // bool get _isButtonEnabled {
+  //   return _emailController.text.isNotEmpty &&
+  //       _passwordController.text.isNotEmpty &&
+  //       _isChecked;
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +44,7 @@ class _AuthorizationScreenState extends State<AuthorizationScreen> {
                   ),
                 ],
               ),
+              const Gap(12),
               TextField(
                 controller: _emailController,
                 decoration: InputDecoration(
@@ -67,6 +68,7 @@ class _AuthorizationScreenState extends State<AuthorizationScreen> {
                   ),
                 ],
               ),
+              const Gap(12),
               TextField(
                 controller: _passwordController,
                 obscureText: true,
@@ -80,15 +82,27 @@ class _AuthorizationScreenState extends State<AuthorizationScreen> {
                 ),
               ),
               const Gap(24),
-              PrimaryElevatedButton(
-                onPressed: _isButtonEnabled
-                    ? () {
-                  Navigator.pushNamed(context, '/');
-                }
-                    : null,
-                child: const Text('Подтвердить'),
+              ValueListenableBuilder(
+                valueListenable: _passwordController,
+                builder: (context, emailValue, child) {
+                  return ValueListenableBuilder(
+                    valueListenable: _emailController,
+                    builder: (context, passwordValue, child) {
+                      return PrimaryElevatedButton(
+                        onPressed: emailValue.text.isEmpty ||
+                                passwordValue.text.isEmpty ||
+                                !_isChecked
+                            ? null
+                            : () {
+                                Navigator.pushReplacementNamed(context, '/');
+                              },
+                        child: const Text('Подтвердить'),
+                      );
+                    },
+                  );
+                },
               ),
-              Gap(12),
+              const Gap(12),
               RichText(
                 text: TextSpan(
                   style: TextStyle(
@@ -117,7 +131,7 @@ class _AuthorizationScreenState extends State<AuthorizationScreen> {
                 children: [
                   Checkbox(
                     value: _isChecked,
-                    onChanged: (bool? value) {
+                    onChanged: (value) {
                       setState(() {
                         _isChecked = value ?? false;
                       });
@@ -137,9 +151,9 @@ class _AuthorizationScreenState extends State<AuthorizationScreen> {
                               color: Colors.black.withOpacity(.5),
                             ),
                           ),
-                          TextSpan(
+                          const TextSpan(
                             text: 'обработку персональных данных ',
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontWeight: FontWeight.w500,
                             ),
                           ),
@@ -149,9 +163,9 @@ class _AuthorizationScreenState extends State<AuthorizationScreen> {
                               color: Colors.black.withOpacity(.5),
                             ),
                           ),
-                          TextSpan(
+                          const TextSpan(
                             text: 'правилами пользовательского соглашения',
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontWeight: FontWeight.w500,
                             ),
                           ),

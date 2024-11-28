@@ -8,7 +8,7 @@ class CourseEducationResponse {
     required this.id,
     required this.title,
     required this.experience,
-    // required this.image,
+    required this.image,
   });
 
   factory CourseEducationResponse.fromJson(Map<String, dynamic> json) =>
@@ -19,5 +19,5 @@ class CourseEducationResponse {
   final int id;
   final String title;
   final String experience;
-  // final String image;
+  final String image;
 }

@@ -45,6 +45,11 @@ class _FiltersScreenState extends State<FiltersScreen> {
             title: const Text('Фильтры'),
             actions: [
               TextButton(
+                style: const ButtonStyle(
+                  foregroundColor: WidgetStatePropertyAll(
+                    Colors.black,
+                  ),
+                ),
                 onPressed: () {
                   setState(
                     _selectedFilters.clear,
@@ -52,6 +57,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
                 },
                 child: const Text('Сбросить'),
               ),
+              const SizedBox(width: 4),
             ],
           ),
           const SliverGap(24),

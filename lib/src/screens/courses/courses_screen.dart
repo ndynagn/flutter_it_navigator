@@ -1,13 +1,13 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_it_navigator/src/common/models/vacancy_response.dart';
+import 'package:flutter_it_navigator/src/common/models/course_education_response.dart';
 import 'package:flutter_it_navigator/src/common/primary_card.dart';
 import 'package:gap/gap.dart';
 import 'package:get_it/get_it.dart';
 
-class CompanyDetails extends StatefulWidget {
-  const CompanyDetails({
+class CoursesScreen extends StatefulWidget {
+  const CoursesScreen({
     super.key,
     required this.id,
   });
@@ -15,37 +15,37 @@ class CompanyDetails extends StatefulWidget {
   final int id;
 
   @override
-  State<CompanyDetails> createState() => _CompanyDetailsState();
+  State<CoursesScreen> createState() => _CoursesScreenState();
 }
 
-class _CompanyDetailsState extends State<CompanyDetails> {
+class _CoursesScreenState extends State<CoursesScreen> {
   late final Dio _dio;
   bool _isLoading = true;
   DioException? _error;
-  List<VacancyResponse> _vacancies = [];
-  final _added = <int>{};
+  late final List<CourseEducationResponse> _news;
 
   @override
   void initState() {
     _dio = GetIt.I.get<Dio>();
     super.initState();
-    _fetchVacancies();
+    _fetchNews();
   }
 
-  Future<void> _fetchVacancies() async {
+  Future<void> _fetchNews() async {
     try {
       _isLoading = true;
 
-      final response = await _dio.get<List<dynamic>>('/vacancies/');
-
-      final unsortedVacancies =
-          response.data!.map((e) => VacancyResponse.fromJson(e)).toList();
-
-      final sortedVacancies = unsortedVacancies
-        ..removeWhere((e) => e.idCompany != widget.id);
+      final response = await _dio.get<List<dynamic>>(
+        '/courses-education/',
+      );
 
       setState(() {
-        _vacancies = sortedVacancies;
+        _news = List.generate(
+          response.data!.length,
+          (index) => CourseEducationResponse.fromJson(
+            response.data![0],
+          ),
+        );
       });
     } on DioException catch (e) {
       setState(() {
@@ -61,11 +61,12 @@ class _CompanyDetailsState extends State<CompanyDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Вакансии'),
-      ),
       body: CustomScrollView(
         slivers: [
+          const SliverAppBar(
+            pinned: true,
+            title: Text('Курсы'),
+          ),
           if (_isLoading)
             const SliverFillRemaining(
               hasScrollBody: false,
@@ -94,31 +95,17 @@ class _CompanyDetailsState extends State<CompanyDetails> {
             )
           else
             SliverList.separated(
-              itemCount: _vacancies.length,
+              itemCount: _news.length,
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 12,
                   ),
                   child: PrimaryCard(
-                    title: _vacancies[index].name,
-                    subtitle: _vacancies[index].experience,
-                    image: _vacancies[index].image,
-                    isVacancy: true,
+                    title: _news[index].title,
+                    subtitle: _news[index].experience,
+                    image: _news[index].image,
                     onTap: () {},
-                    onAddTap: () {
-                      print(_added);
-                      if (_added.contains(_vacancies[index].id)) {
-                        setState(() {
-                          _added.remove(_vacancies[index].id);
-                        });
-                      } else {
-                        setState(() {
-                          _added.add(_vacancies[index].id);
-                        });
-                      }
-                    },
-                    isAdded: _added.contains(_vacancies[index].id),
                   ),
                 );
               },
@@ -126,7 +113,7 @@ class _CompanyDetailsState extends State<CompanyDetails> {
                 return const Gap(12);
               },
             ),
-          const SliverGap(12),
+          const SliverGap(72),
         ],
       ),
     );

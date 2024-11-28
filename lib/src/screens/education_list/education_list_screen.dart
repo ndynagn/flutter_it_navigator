@@ -3,8 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_it_navigator/src/common/models/education_company_response.dart';
 import 'package:flutter_it_navigator/src/common/primary_card.dart';
-import 'package:flutter_it_navigator/src/screens/profile/profile_screen.dart';
+import 'package:flutter_it_navigator/src/screens/courses/courses_screen.dart';
 import 'package:flutter_it_navigator/src/screens/filters/filters_screen.dart';
+import 'package:flutter_it_navigator/src/screens/profile/profile_screen.dart';
 import 'package:gap/gap.dart';
 import 'package:get_it/get_it.dart';
 
@@ -12,8 +13,7 @@ class EducationListScreen extends StatefulWidget {
   const EducationListScreen({super.key});
 
   @override
-  State<EducationListScreen> createState() =>
-      _EducationListScreenState();
+  State<EducationListScreen> createState() => _EducationListScreenState();
 }
 
 class _EducationListScreenState extends State<EducationListScreen> {
@@ -127,7 +127,16 @@ class _EducationListScreenState extends State<EducationListScreen> {
                   title: _companies[index].name,
                   subtitle: _companies[index].description,
                   image: _companies[index].image,
-                  onTap: () {},
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return CoursesScreen(
+                          id: _companies[index].id,
+                        );
+                      },
+                    ),
+                  ),
                 ),
               );
             },
